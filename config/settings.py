@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'rest_framework',
+    'users.apps.UsersConfig',
+    'fishing.apps.FishingConfig',
+    'social.apps.SocialConfig',
+    'ai.apps.AiConfig'
 ]
 
 MIDDLEWARE = [
