@@ -11,11 +11,6 @@ from django.contrib.gis.db import models as gis_models
 # Create your models here.
 
 class Session(models.Model):
-    class SessionType(models.TextChoices):
-        STATIONARY = 'STATIONARY', 'Stationary'
-        ROVING = 'ROVING', 'Roving'
-        ACTIVE = 'ACTIVE', 'Active'
-
     class Visibility(models.TextChoices):
         PRIVATE = 'PRIVATE', 'Private'
         FRIENDS = 'FRIENDS', 'Friends Only'
@@ -25,19 +20,14 @@ class Session(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    route = gis_models.LineStringField(null=True, blank=True, geography=True)
-    type = models.CharField(
-        max_length=20,
-        choices=SessionType.choices,
-        default=SessionType.STATIONARY
-    )
+
     visibility = models.CharField(
         max_length=20,
         choices=Visibility.choices,
         default=Visibility.PRIVATE
     )
 
-    distance_walked_meters = models.FloatField(default=None, null=True)
+    notes = models.TextField(null=True, blank=True)
 
 
 class Catch(models.Model):
